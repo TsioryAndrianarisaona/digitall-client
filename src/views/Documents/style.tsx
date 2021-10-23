@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     color: Colors.red,
-    fontWeight: '700',
   },
   folderContainer: {
     flexDirection: 'row',

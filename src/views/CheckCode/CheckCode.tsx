@@ -7,7 +7,7 @@ import styles from './style';
 const CheckCode = ({navigation}) => {
   const [pin, setPin] = useState('');
 
-  const {container, pinContainer, input, button} = styles;
+  const {container, pinContainer, input, button, buttonText} = styles;
 
   return (
     <SafeAreaView style={container}>
@@ -17,10 +17,12 @@ const CheckCode = ({navigation}) => {
           onChangeText={pinText => setPin(pinText)}
           placeholder="Code PIN"
           style={input}
+          keyboardType="number-pad"
         />
         <Button
-          text="Vérifier..."
+          text="Vérifier"
           style={button}
+          textStyle={buttonText}
           onPress={() => {
             navigation.navigate('TabNavigation');
           }}

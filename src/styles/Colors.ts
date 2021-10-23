@@ -4,4 +4,5 @@ export const Colors = {
   green: '#07b853',
   orange: '#F96D3A',
   opacity: '#00000090',
+  gray: '#E8E8E8',
 };

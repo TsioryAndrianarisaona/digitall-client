@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    justifyContent: 'center',
   },
   pinContainer: {
     flexBasis: '25%',
@@ -16,10 +15,19 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     flexBasis: '45%',
+    borderRadius: 20,
+    paddingLeft: normalize(15),
+    borderColor: Colors.green,
   },
   button: {
-    borderWidth: 1,
     padding: normalize(20),
+    backgroundColor: Colors.green,
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: Colors.white,
+    textAlign: 'center',
+    fontWeight: '700',
   },
 });
 

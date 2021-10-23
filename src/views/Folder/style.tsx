@@ -57,9 +57,11 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    flexBasis: '48%',
-    marginTop: normalize(20),
+    flexBasis: '45%',
+    borderRadius: 20,
     paddingLeft: normalize(15),
+    borderColor: Colors.green,
+    marginTop: normalize(20),
   },
   button: {
     padding: normalize(20),
