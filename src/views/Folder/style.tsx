@@ -34,6 +34,62 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: normalize(30),
+    paddingVertical: normalize(20),
+    marginHorizontal: normalize(20),
+    borderRadius: normalize(10),
+  },
+  modaltitle: {
+    fontSize: normalize(18),
+    fontWeight: '500',
+    textAlign: 'center',
+    color: Colors.red,
+  },
+  input: {
+    borderWidth: 1,
+    flexBasis: '48%',
+    marginTop: normalize(20),
+    paddingLeft: normalize(15),
+  },
+  button: {
+    padding: normalize(20),
+    marginTop: normalize(20),
+    backgroundColor: Colors.green,
+    borderRadius: 50,
+  },
+  buttonText: {
+    color: Colors.white,
+    textAlign: 'center',
+    fontWeight: '700',
+  },
+  documentContainer: {
+    marginTop: normalize(10),
+  },
+  document: {
+    marginTop: normalize(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  documentLabel: {
+    flex: 1,
+    paddingLeft: normalize(20),
+  },
+  documentStatus: {
+    height: normalize(20),
+    width: normalize(20),
+    borderRadius: 50,
+  },
 });
 
 export default styles;
