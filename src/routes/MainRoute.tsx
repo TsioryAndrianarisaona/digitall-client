@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Scan from '../views/Scan/Scan';
+import CheckCode from '../views/CheckCode/CheckCode';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,13 @@ const MainRoute = () => {
           component={Scan}
           options={{
             title: 'Scannez ici',
+          }}
+        />
+        <Stack.Screen
+          name="CheckCode"
+          component={CheckCode}
+          options={{
+            title: 'Vérifier votre code',
           }}
         />
       </Stack.Navigator>

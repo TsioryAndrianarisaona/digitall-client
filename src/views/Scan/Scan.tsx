@@ -8,7 +8,7 @@ const Scan = ({navigation}) => {
   const scanner = useRef(null);
 
   const onSuccess = e => {
-    // navigation.navigate('Informations');
+    navigation.navigate('CheckCode');
     console.log(e);
   };
 
