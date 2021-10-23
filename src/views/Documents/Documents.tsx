@@ -3,6 +3,7 @@ import {FlatList, SafeAreaView} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import styles from './style';
 import Button from '../../components/Button';
+import {Colors} from '../../styles/Colors';
 
 const Documents = ({}) => {
   const [checked, setChecked] = useState([]);
@@ -44,6 +45,7 @@ const Documents = ({}) => {
               title={item.label}
               checked={checked.includes(item.id) ? true : false}
               onPress={() => _onCheck(item)}
+              checkedColor={Colors.green}
             />
           );
         }}

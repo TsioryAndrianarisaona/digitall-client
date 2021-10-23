@@ -9,12 +9,15 @@ const styles = StyleSheet.create({
     padding: normalize(15),
   },
   button: {
-    borderWidth: 1,
     padding: normalize(20),
     marginTop: normalize(10),
+    marginBottom: normalize(20),
+    backgroundColor: Colors.green,
+    borderRadius: 20,
   },
   buttonText: {
     alignSelf: 'center',
+    color: Colors.white,
   },
 });
 

@@ -1,10 +1,18 @@
 import React from 'react';
-import {FlatList, SafeAreaView, Text, TouchableOpacity} from 'react-native';
-import {Avatar, Icon} from 'react-native-elements';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {Icon} from 'react-native-elements';
+import QRCode from 'react-native-qrcode-svg';
+import {Colors} from '../../styles/Colors';
 import styles from './style';
 
 const Home = ({navigation}) => {
-  const {container, avatar, cardContainer, card, title, icon, columnWrapper} =
+  const {container, code, cardContainer, card, title, icon, columnWrapper} =
     styles;
 
   const cardItem: any[] = [
@@ -22,14 +30,19 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={container}>
-      <Avatar
-        rounded
-        size="xlarge"
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
-        containerStyle={avatar}
-      />
+      <View style={code}>
+        <QRCode
+          value="E9AC5601CEDD8747FDD7C911329F9A0BA8B78A19"
+          size={150}
+          color="black"
+          backgroundColor="white"
+          logo={require('../../../assets/logo.png')}
+          logoSize={30}
+          logoMargin={2}
+          logoBorderRadius={15}
+          logoBackgroundColor="white"
+        />
+      </View>
       <FlatList
         data={cardItem}
         renderItem={({item, index}) => {
@@ -45,6 +58,7 @@ const Home = ({navigation}) => {
                 name="home"
                 type="antdesign"
                 style={icon}
+                color={Colors.white}
                 tvParallaxProperties={undefined}
               />
             </TouchableOpacity>

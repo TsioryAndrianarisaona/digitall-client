@@ -7,22 +7,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
-  avatar: {
+  code: {
     alignSelf: 'center',
     marginTop: normalize(30),
   },
   cardContainer: {
-    paddingTop: normalize(20),
+    paddingTop: normalize(30),
   },
   card: {
-    borderWidth: 1,
     flexBasis: '45%',
     paddingTop: normalize(40),
     paddingBottom: normalize(40),
+    backgroundColor: Colors.green,
+    borderRadius: 20,
   },
   title: {
     textAlign: 'center',
     fontWeight: '700',
+    color: Colors.white,
   },
   icon: {
     marginTop: normalize(20),
