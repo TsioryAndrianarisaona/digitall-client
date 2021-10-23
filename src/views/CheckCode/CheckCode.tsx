@@ -22,7 +22,6 @@ const CheckCode = ({navigation}) => {
           text="Vérifier..."
           style={button}
           onPress={() => {
-            console.log('aaaa');
             navigation.navigate('TabNavigation');
           }}
         />
