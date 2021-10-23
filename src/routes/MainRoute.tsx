@@ -34,8 +34,7 @@ const MainRoute = () => {
           name="TabNavigation"
           component={TabNavigation}
           options={{
-            title: '',
-            headerLeft: () => <></>,
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
