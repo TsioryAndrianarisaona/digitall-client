@@ -37,7 +37,9 @@ const Home = ({navigation}) => {
             <TouchableOpacity
               style={card}
               key={index}
-              onPress={() => navigation.navigate('Documents')}>
+              onPress={() =>
+                navigation.navigate('Documents', {title: item.name})
+              }>
               <Text style={title}>{item.name}</Text>
               <Icon
                 name="home"

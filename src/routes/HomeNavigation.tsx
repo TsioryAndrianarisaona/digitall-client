@@ -16,10 +16,10 @@ const HomeNavigation = () => {
       <Stack.Screen
         name="Documents"
         component={Documents}
-        options={{
-          title: 'Les documents',
+        options={({route}) => ({
+          title: route.params ? route.params.title : '',
           headerTitleAlign: 'center',
-        }}
+        })}
       />
     </Stack.Navigator>
   );
