@@ -5,12 +5,13 @@ import Home from '../views/Home/Home';
 
 const Stack = createStackNavigator();
 
-const HomeNavigation = () => {
+const HomeNavigation = ({route}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={Home}
+        initialParams={route.params}
         options={{headerShown: false}}
       />
       <Stack.Screen

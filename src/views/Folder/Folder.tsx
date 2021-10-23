@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,72 +8,58 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {Modal} from 'react-native-paper';
+import FolderAPI from '../../api/FolderAPI';
 import Button from '../../components/Button';
 import InputText from '../../components/InputText';
 import {Colors} from '../../styles/Colors';
 import styles from './style';
 
-const Folder = ({}) => {
+const Folder = ({route}) => {
   const [newFolderVisible, setNewFolderVisible] = useState(false);
   const [documentListVisible, setDocumentListVisible] = useState(false);
+  const [folders, setFolders] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [newFolder, setNewFolder] = useState('');
 
-  const cardItem: any[] = [
-    {
-      id: 1,
-      name: 'Dossier 1',
-      iconName: 'home',
-      iconType: 'entypo',
-    },
-    {
-      id: 2,
-      name: 'Dossier 2',
-      iconName: 'home',
-      iconType: 'feather',
-    },
-    {
-      id: 3,
-      name: 'Dossier 3',
-      iconName: 'home',
-      iconType: 'feather',
-    },
-    {
-      id: 4,
-      name: 'Dossier 4',
-      iconName: 'home',
-      iconType: 'feather',
-    },
-    {
-      id: 5,
-      name: 'Dossier 5',
-      iconName: 'home',
-      iconType: 'feather',
-    },
-    {
-      id: 6,
-      name: 'Dossier 6',
-      iconName: 'home',
-      iconType: 'feather',
-    },
-  ];
+  const citizen = route.params;
 
-  const documents = [
-    {
-      id: 1,
-      label: 'Certificat de résidence',
-      status: 0,
-    },
-    {
-      id: 2,
-      label: 'Certificat de vie',
-      status: 1,
-    },
-    {
-      id: 3,
-      label: 'Certificat de célibat',
-      status: 2,
-    },
-  ];
+  const getFolders = () => {
+    new FolderAPI()
+      .getFolders(citizen.id)
+      .then(response => {
+        setFolders(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const createFolder = () => {
+    const json = {name: newFolder, citizen: citizen.id};
+    new FolderAPI()
+      .createFolder(json)
+      .then(response => {
+        setFolders(folders.concat(response.data[response.data.length - 1]));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const getDocumentsByFolder = (idFolder: string) => {
+    new FolderAPI()
+      .getDocumentsByFolder(idFolder)
+      .then(response => {
+        setDocuments(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getFolders();
+  }, []);
 
   const {
     container,
@@ -99,12 +85,15 @@ const Folder = ({}) => {
         <Text style={title}>Mes documents</Text>
       </View>
       <FlatList
-        data={cardItem}
+        data={folders}
         renderItem={({item, index}) => {
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => setDocumentListVisible(true)}>
+              onPress={() => {
+                getDocumentsByFolder(item.id);
+                setDocumentListVisible(true);
+              }}>
               <Icon
                 name="folder"
                 type="entypo"
@@ -150,6 +139,7 @@ const Folder = ({}) => {
               style={button}
               textStyle={buttonText}
               onPress={() => {
+                createFolder();
                 setNewFolderVisible(false);
               }}
             />
@@ -176,7 +166,7 @@ const Folder = ({}) => {
                           ? {backgroundColor: Colors.red}
                           : {backgroundColor: Colors.orange},
                       ]}></View>
-                    <Text style={documentLabel}>{item.label}</Text>
+                    <Text style={documentLabel}>{item.name}</Text>
                   </View>
                 );
               }}

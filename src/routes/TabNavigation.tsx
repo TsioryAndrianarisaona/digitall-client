@@ -7,12 +7,15 @@ import HomeNavigation from './HomeNavigation';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const TabNavigation = () => {
+const TabNavigation = ({route}) => {
+  const {citizen} = route.params;
+
   return (
     <Tab.Navigator barStyle={{backgroundColor: Colors.red}}>
       <Tab.Screen
         name="HomeNavigation"
         component={HomeNavigation}
+        initialParams={citizen}
         options={{
           tabBarLabel: 'Mes informations',
           tabBarIcon: () => (
@@ -28,6 +31,7 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Folder"
         component={Folder}
+        initialParams={citizen}
         options={{
           tabBarLabel: 'Mes documents',
           tabBarIcon: () => (

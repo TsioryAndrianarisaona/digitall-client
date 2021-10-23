@@ -5,41 +5,55 @@ import styles from './style';
 import Button from '../../components/Button';
 import {Colors} from '../../styles/Colors';
 import {RadioButton} from 'react-native-paper';
+import InformationAPI from '../../api/InformationAPI';
+import FolderAPI from '../../api/FolderAPI';
 
-const Documents = ({}) => {
+const Documents = ({navigation, route}) => {
+  const [documents, setDocuments] = useState([]);
+  const [folders, setFolders] = useState([]);
   const [checked, setChecked] = useState([]);
   const [visible, setVisible] = useState(false);
   const [checkedFolder, setCheckedFolder] = useState('');
 
-  const documents = [
-    {
-      id: 1,
-      label: 'Certificat de résidence',
-    },
-    {
-      id: 2,
-      label: 'Certificat de vie',
-    },
-    {
-      id: 3,
-      label: 'Certificat de célibat',
-    },
-  ];
+  const {idMenu, idCitizen} = route.params;
 
-  const folders = [
-    {
-      id: 1,
-      label: 'Dossier 1',
-    },
-    {
-      id: 2,
-      label: 'Dossier 2',
-    },
-    {
-      id: 3,
-      label: 'Dossier 3',
-    },
-  ];
+  const getDocuments = () => {
+    new InformationAPI()
+      .getMenuDetails(idMenu)
+      .then(response => {
+        setDocuments(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const getFolders = () => {
+    new FolderAPI()
+      .getFolders(idCitizen)
+      .then(response => {
+        setFolders(response.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const createDocuments = () => {
+    const json = {
+      folder: Number.parseInt(checkedFolder),
+      document: checked,
+    };
+    new FolderAPI()
+      .createDocumentInFolder(json)
+      .then(response => {
+        setVisible(false);
+        navigation.goBack();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const _onCheck = value => {
     if (!checked.includes(value.id)) {
@@ -48,6 +62,11 @@ const Documents = ({}) => {
       setChecked(checked.filter(item => item !== value.id));
     }
   };
+
+  useEffect(() => {
+    getDocuments();
+    getFolders();
+  }, [idMenu]);
 
   const {
     container,
@@ -68,7 +87,7 @@ const Documents = ({}) => {
         renderItem={({item, index}) => {
           return (
             <CheckBox
-              title={item.label}
+              title={item.name}
               checked={checked.includes(item.id) ? true : false}
               onPress={() => _onCheck(item)}
               checkedColor={Colors.green}
@@ -101,7 +120,7 @@ const Documents = ({}) => {
                       onPress={() => setCheckedFolder(item.id.toString())}
                       color={Colors.green}
                     />
-                    <Text>{item.label}</Text>
+                    <Text>{item.name}</Text>
                   </View>
                 );
               }}
@@ -112,7 +131,7 @@ const Documents = ({}) => {
               style={folderButton}
               textStyle={buttonText}
               onPress={() => {
-                setVisible(false);
+                createDocuments();
               }}
             />
           </View>

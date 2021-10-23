@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     justifyContent: 'space-evenly',
+    marginTop: normalize(10),
   },
 });
 

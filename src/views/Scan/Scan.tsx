@@ -2,14 +2,27 @@ import {useFocusEffect} from '@react-navigation/core';
 import React, {useRef} from 'react';
 import {Dimensions, SafeAreaView} from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import ScanAPI from '../../api/ScanAPI';
 import styles from './style';
 
 const Scan = ({navigation}) => {
   const scanner = useRef(null);
 
   const onSuccess = e => {
-    navigation.navigate('CheckCode');
-    console.log(e.data);
+    const json = {
+      qrCode: e.data,
+    };
+    new ScanAPI()
+      .scanAuthentification(json)
+      .then(response => {
+        navigation.navigate('CheckCode', {
+          qrCode: e.data,
+          codeConf: response.data.codeConf,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   useFocusEffect(() => {
