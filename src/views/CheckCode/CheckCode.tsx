@@ -18,7 +18,14 @@ const CheckCode = ({navigation}) => {
           placeholder="Code PIN"
           style={input}
         />
-        <Button text="Vérifier..." style={button} />
+        <Button
+          text="Vérifier..."
+          style={button}
+          onPress={() => {
+            console.log('aaaa');
+            navigation.navigate('TabNavigation');
+          }}
+        />
       </View>
     </SafeAreaView>
   );

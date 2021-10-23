@@ -9,7 +9,7 @@ const Scan = ({navigation}) => {
 
   const onSuccess = e => {
     navigation.navigate('CheckCode');
-    console.log(e);
+    console.log(e.data);
   };
 
   useFocusEffect(() => {

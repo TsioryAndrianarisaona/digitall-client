@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Scan from '../views/Scan/Scan';
 import CheckCode from '../views/CheckCode/CheckCode';
+import TabNavigation from './TabNavigation';
 
 const Stack = createStackNavigator();
 
@@ -12,9 +13,7 @@ const MainRoute = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
-          headerTitleStyle: {
-            alignSelf: 'center',
-          },
+          headerTitleAlign: 'center',
         }}>
         <Stack.Screen
           name="Scan"
@@ -28,6 +27,15 @@ const MainRoute = () => {
           component={CheckCode}
           options={{
             title: 'Vérifier votre code',
+            headerRight: () => <></>,
+          }}
+        />
+        <Stack.Screen
+          name="TabNavigation"
+          component={TabNavigation}
+          options={{
+            title: '',
+            headerLeft: () => <></>,
           }}
         />
       </Stack.Navigator>
