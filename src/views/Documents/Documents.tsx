@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList, Modal, SafeAreaView, View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import styles from './style';
 import Button from '../../components/Button';
 import {Colors} from '../../styles/Colors';
+import {RadioButton} from 'react-native-paper';
 
 const Documents = ({}) => {
   const [checked, setChecked] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [checkedFolder, setCheckedFolder] = useState('');
 
   const documents = [
     {
@@ -23,6 +26,21 @@ const Documents = ({}) => {
     },
   ];
 
+  const folders = [
+    {
+      id: 1,
+      label: 'Dossier 1',
+    },
+    {
+      id: 2,
+      label: 'Dossier 2',
+    },
+    {
+      id: 3,
+      label: 'Dossier 3',
+    },
+  ];
+
   const _onCheck = value => {
     if (!checked.includes(value.id)) {
       setChecked(checked.concat(value.id));
@@ -31,9 +49,17 @@ const Documents = ({}) => {
     }
   };
 
-  const {container, button, buttonText} = styles;
-
-  useEffect(() => {}, []);
+  const {
+    container,
+    button,
+    buttonText,
+    background,
+    modalContainer,
+    modaltitle,
+    folderContainer,
+    folder,
+    folderButton,
+  } = styles;
 
   return (
     <SafeAreaView style={container}>
@@ -54,7 +80,44 @@ const Documents = ({}) => {
         text="Envoyer la demander"
         style={button}
         textStyle={buttonText}
+        onPress={() => setVisible(true)}
       />
+      <Modal visible={visible} onDismiss={() => setVisible(false)} transparent>
+        <View style={background}>
+          <View style={modalContainer}>
+            <Text style={modaltitle}>Séléctionner un dossier</Text>
+            <FlatList
+              data={folders}
+              renderItem={({item, index}) => {
+                return (
+                  <View style={folderContainer}>
+                    <RadioButton
+                      value={checkedFolder}
+                      status={
+                        checkedFolder === item.id.toString()
+                          ? 'checked'
+                          : 'unchecked'
+                      }
+                      onPress={() => setCheckedFolder(item.id.toString())}
+                      color={Colors.green}
+                    />
+                    <Text>{item.label}</Text>
+                  </View>
+                );
+              }}
+              style={folder}
+            />
+            <Button
+              text="Enregistrer"
+              style={folderButton}
+              textStyle={buttonText}
+              onPress={() => {
+                setVisible(false);
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };

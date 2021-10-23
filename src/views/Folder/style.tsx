@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     padding: normalize(20),
     marginTop: normalize(20),
     backgroundColor: Colors.green,
-    borderRadius: 50,
+    borderRadius: 20,
   },
   buttonText: {
     color: Colors.white,
